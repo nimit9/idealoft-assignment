@@ -1,9 +1,9 @@
 import config from "./config.js";
 import mysql from "mysql2/promise";
 
-const db = await mysql.createConnection(config);
+const db = mysql.createPool(config);
 
-db.connect((err) => {
+await db.connect((err) => {
     if (err) {
         console.log("Unable to connect to db");
     }

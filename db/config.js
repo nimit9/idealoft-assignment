@@ -9,5 +9,8 @@ const config = {
     port: process.env.DB_PORT,
     dateStrings: true,
     multipleStatements: true,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
 };
 export default config;

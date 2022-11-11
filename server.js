@@ -49,7 +49,7 @@ const port = process.env.PORT || 4000;
 
 const start = async () => {
     try {
-        const db = await mysql.createConnection(config);
+        const db = mysql.createPool(config);
 
         await db.connect((err) => {
             if (err) {
