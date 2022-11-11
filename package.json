@@ -8,8 +8,9 @@
     "build-client": "cd client && npm run build",
     "install-client": "cd client && npm install",
     "render-postbuild": "npm run install-client && npm run build-client",
-    "start": "nodemon server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "nodemon server --ignore client",
+    "client": "npm start --prefix client",
+    "start": "concurrently --kill-others-on-fail \" npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
@@ -34,6 +35,7 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
+    "concurrently": "^7.5.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20"
   }

@@ -56,7 +56,7 @@ const IndividualUser = () => {
         setLoading(true);
         try {
             const { data } = await axios.post(
-                `${process.env.REACT_APP_API_URL}/api/v1/admin/tree-data`,
+                "/api/v1/admin/tree-data",
                 { userId },
                 {
                     headers: {

@@ -29,7 +29,6 @@ if (process.env.NODE_ENV !== "production") {
     app.use(morgan("dev"));
 }
 
-app.use(express.static(path.resolve(__dirname, "./client/build")));
 app.use(express.json());
 app.use(
     bodyParser.urlencoded({
@@ -46,9 +45,12 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/user", authenticateUser, userRouter);
 app.use("/api/v1/admin", authenticateUser, checkAdmin, adminRouter);
 
-app.get("*", function (req, res) {
-    res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-});
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.resolve(__dirname, "./client/build")));
+    app.get("*", function (req, res) {
+        res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+    });
+}
 
 // *******Middlewares ***************
 app.use(notFoundMiddleware);

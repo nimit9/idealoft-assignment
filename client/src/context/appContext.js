@@ -35,34 +35,6 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    // axios
-    const authFetch = axios.create({
-        baseURL: `${process.env.REACT_APP_API_URL}/api/v1`,
-    });
-
-    // request
-    authFetch.interceptors.request.use(
-        (config) => {
-            config.headers.common["Authorization"] = `Bearer ${state.token}`;
-            return config;
-        },
-        (error) => {
-            return Promise.reject(error);
-        }
-    );
-    // response
-    authFetch.interceptors.response.use(
-        (response) => {
-            return response;
-        },
-        (error) => {
-            if (error.response.status === 401) {
-                logoutUser();
-            }
-            return Promise.reject(error);
-        }
-    );
-
     const displayAlert = () => {
         dispatch({ type: DISPLAY_ALERT });
         clearAlert();
@@ -88,7 +60,7 @@ const AppProvider = ({ children }) => {
         dispatch({ type: REGISTER_USER_BEGIN });
         try {
             const response = await axios.post(
-                `${process.env.REACT_APP_API_URL}/api/v1/auth/register`,
+                "/api/v1/auth/register",
                 currentUser,
                 { headers: { "Content-Type": "multipart/form-data" } }
             );
@@ -111,7 +83,7 @@ const AppProvider = ({ children }) => {
         dispatch({ type: LOGIN_USER_BEGIN });
         try {
             const response = await axios.post(
-                `${process.env.REACT_APP_API_URL}/api/v1/auth/login`,
+                "/api/v1/auth/login",
                 currentUser
             );
             const { user, token } = response.data;
@@ -138,7 +110,7 @@ const AppProvider = ({ children }) => {
         dispatch({ type: UPLOAD_EXCEL_FILE_BEGIN });
         try {
             const response = await axios.post(
-                `${process.env.REACT_APP_API_URL}/api/v1/user/upload-data`,
+                "/api/v1/user/upload-data",
                 formData,
                 {
                     headers: {
