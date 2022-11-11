@@ -48,7 +48,7 @@ app.use("/api/v1/admin", authenticateUser, checkAdmin, adminRouter);
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
     app.get("*", function (req, res) {
-        res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
     });
 }
 
