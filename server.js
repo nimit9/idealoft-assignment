@@ -5,14 +5,12 @@ import authRouter from "./routes/authRouter.js";
 import authenticateUser from "./middlewares/auth.js";
 import bodyParser from "body-parser";
 import checkAdmin from "./middlewares/checkAdmin.js";
-import config from "./db/config.js";
 import cors from "cors";
 import dotenv from "dotenv";
 import { errorHandlerMiddleware } from "./middlewares/error-handler.js";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
-import mysql from "mysql2/promise";
 import notFoundMiddleware from "./middlewares/not-found.js";
 import userRouter from "./routes/userRouter.js";
 import xss from "xss-clean";
@@ -49,13 +47,6 @@ const port = process.env.PORT || 4000;
 
 const start = async () => {
     try {
-        const db = mysql.createPool(config);
-
-        await db.connect((err) => {
-            if (err) {
-                console.log("Unable to connect to db");
-            }
-        });
         app.listen(port, () => {
             console.log(` Server is running on port ${port}`);
         });
