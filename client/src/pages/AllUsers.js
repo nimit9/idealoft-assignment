@@ -66,11 +66,14 @@ const AllUsers = () => {
     const getAllUsers = async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get("/api/v1/admin/get-all-users", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const { data } = await axios.get(
+                `${process.env.REACT_APP_API_URL}/api/v1/admin/get-all-users`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
             setTimeout(() => {
                 setAllUsers(data.users);
                 setLoading(false);

@@ -17,11 +17,14 @@ const UserTreeData = () => {
     const getUserTreeData = async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get("/api/v1/user/tree-data", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const { data } = await axios.get(
+                `${process.env.REACT_APP_API_URL}/api/v1/user/tree-data`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
             setTimeout(() => {
                 setTreeData(data.treeData);
                 setLoading(false);

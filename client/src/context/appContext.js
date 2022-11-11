@@ -60,7 +60,7 @@ const AppProvider = ({ children }) => {
         dispatch({ type: REGISTER_USER_BEGIN });
         try {
             const response = await axios.post(
-                "/api/v1/auth/register",
+                `${process.env.REACT_APP_API_URL}/api/v1/auth/register`,
                 currentUser,
                 { headers: { "Content-Type": "multipart/form-data" } }
             );
@@ -83,7 +83,7 @@ const AppProvider = ({ children }) => {
         dispatch({ type: LOGIN_USER_BEGIN });
         try {
             const response = await axios.post(
-                "/api/v1/auth/login",
+                `${process.env.REACT_APP_API_URL}/api/v1/auth/login`,
                 currentUser
             );
             const { user, token } = response.data;
@@ -110,7 +110,7 @@ const AppProvider = ({ children }) => {
         dispatch({ type: UPLOAD_EXCEL_FILE_BEGIN });
         try {
             const response = await axios.post(
-                "/api/v1/user/upload-data",
+                `${process.env.REACT_APP_API_URL}/api/v1/user/upload-data`,
                 formData,
                 {
                     headers: {

@@ -31,11 +31,14 @@ const Admin = () => {
     const getUserTreeData = async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get("api/v1/admin/tree-data", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const { data } = await axios.get(
+                `${process.env.REACT_APP_API_URL}/api/v1/admin/tree-data`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
             const { tableData, graphData } = data;
             setTimeout(() => {
                 setTableData(tableData);

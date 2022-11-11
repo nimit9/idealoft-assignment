@@ -31,12 +31,16 @@ const User = () => {
 
         setLoading(true);
         try {
-            await axios.post("/api/v1/user/upload-data", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            await axios.post(
+                `${process.env.REACT_APP_API_URL}/api/v1/user/upload-data`,
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
             setSuccess(true);
         } catch (error) {
             setLoading(false);
